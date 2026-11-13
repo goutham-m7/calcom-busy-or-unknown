@@ -1,0 +1,15 @@
+{
+  "repository": "https://github.com/calcom/cal.diy",
+  "revision": "ef7954d16ab50882ca2f263c551537115b8a8bb1",
+  "checked": "2026-11-13",
+  "issue": 30382,
+  "linkedOpenPullRequests": [
+    30383,
+    30389
+  ],
+  "files": {
+    "vendor/CalendarService.ts": "709c771513b1919f075e37292f572c087f705b5e04ab0b2637e76cba71c41f0d",
+    "vendor/CalendarService.upstream.test.ts": "667f8500225c8951969365531842bbf87bbba50b156e62772e19a6837f9f6fac",
+    "vendor/LICENSE": "95f3d2c4bf316ccec41144d528fb9902de0bf91c635cc404bd94c7f7ebac321c"
+  }
+}

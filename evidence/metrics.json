@@ -1,0 +1,13 @@
+{
+  "fixtures": 50,
+  "candidateSlots": 400,
+  "blockedOrUnknownSlots": 255,
+  "baselineUnsafe": 235,
+  "proposedUnsafe": 0,
+  "legitimateSlots": 145,
+  "baselinePreserved": 145,
+  "proposedPreserved": 145,
+  "localizationCorrect": 30,
+  "localizationExpected": 30,
+  "falsePositiveErrors": 0
+}

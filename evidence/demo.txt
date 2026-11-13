@@ -1,0 +1,11 @@
+
+> calcom-busy-or-unknown@1.0.0 demo
+> tsx src/cli.ts
+
+Busy-or-Unknown Calendar Lab
+Public Cal.diy adapter; synthetic Graph boundary; offline only.
+Fixtures: 50 | candidate slots: 400
+Unsafe slots: baseline 235/255 -> proposed 0/255
+Legitimate availability preserved: 145/145
+Error localization: 30/30 | false positives: 0
+Artifacts: report.json, timeline.html

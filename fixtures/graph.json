@@ -1,0 +1,3367 @@
+[
+  {
+    "id": "clean-empty-1",
+    "family": "clean-empty",
+    "query": {
+      "dateFrom": "2026-11-16T09:00:00.000Z",
+      "dateTo": "2026-11-16T13:00:00.000Z",
+      "calendars": [
+        "a",
+        "b"
+      ]
+    },
+    "frames": [
+      {
+        "outerStatus": 200,
+        "gzip": true,
+        "body": {
+          "responses": [
+            {
+              "id": "1",
+              "status": 200,
+              "body": {
+                "value": []
+              }
+            },
+            {
+              "id": "0",
+              "status": 200,
+              "body": {
+                "value": []
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "truth": {
+      "busy": [],
+      "unknown": [],
+      "errors": []
+    }
+  },
+  {
+    "id": "clean-busy-1",
+    "family": "clean-busy",
+    "query": {
+      "dateFrom": "2026-11-16T09:00:00.000Z",
+      "dateTo": "2026-11-16T13:00:00.000Z",
+      "calendars": [
+        "a",
+        "b"
+      ]
+    },
+    "frames": [
+      {
+        "outerStatus": 200,
+        "gzip": true,
+        "body": {
+          "responses": [
+            {
+              "id": "1",
+              "status": 200,
+              "body": {
+                "value": [
+                  {
+                    "showAs": "busy",
+                    "start": {
+                      "dateTime": "2026-11-16T09:00:00"
+                    },
+                    "end": {
+                      "dateTime": "2026-11-16T09:30:00"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "id": "0",
+              "status": 200,
+              "body": {
+                "value": []
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "truth": {
+      "busy": [
+        {
+          "start": "2026-11-16T09:00:00.000Z",
+          "end": "2026-11-16T09:30:00.000Z"
+        }
+      ],
+      "unknown": [],
+      "errors": []
+    }
+  },
+  {
+    "id": "inner-403-1",
+    "family": "inner-403",
+    "query": {
+      "dateFrom": "2026-11-16T09:00:00.000Z",
+      "dateTo": "2026-11-16T13:00:00.000Z",
+      "calendars": [
+        "a",
+        "b"
+      ]
+    },
+    "frames": [
+      {
+        "outerStatus": 200,
+        "gzip": true,
+        "body": {
+          "responses": [
+            {
+              "id": "0",
+              "status": 200,
+              "body": {
+                "value": []
+              }
+            },
+            {
+              "id": "1",
+              "status": 403,
+              "headers": {
+                "Retry-After": "0"
+              },
+              "body": {
+                "error": {
+                  "code": "SyntheticFailure"
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "truth": {
+      "busy": [
+        {
+          "start": "2026-11-16T09:00:00.000Z",
+          "end": "2026-11-16T09:30:00.000Z"
+        }
+      ],
+      "unknown": [
+        "b"
+      ],
+      "errors": [
+        {
+          "calendar": "b",
+          "phase": "initial",
+          "reason": "HTTP 403"
+        }
+      ]
+    }
+  },
+  {
+    "id": "inner-503-1",
+    "family": "inner-503",
+    "query": {
+      "dateFrom": "2026-11-16T09:00:00.000Z",
+      "dateTo": "2026-11-16T13:00:00.000Z",
+      "calendars": [
+        "a",
+        "b"
+      ]
+    },
+    "frames": [
+      {
+        "outerStatus": 200,
+        "gzip": true,
+        "body": {
+          "responses": [
+            {
+              "id": "0",
+              "status": 200,
+              "body": {
+                "value": []
+              }
+            },
+            {
+              "id": "1",
+              "status": 503,
+              "headers": {
+                "Retry-After": "0"
+              },
+              "body": {
+                "error": {
+                  "code": "SyntheticFailure"
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "truth": {
+      "busy": [
+        {
+          "start": "2026-11-16T09:00:00.000Z",
+          "end": "2026-11-16T09:30:00.000Z"
+        }
+      ],
+      "unknown": [
+        "b"
+      ],
+      "errors": [
+        {
+          "calendar": "b",
+          "phase": "initial",
+          "reason": "HTTP 503"
+        }
+      ]
+    }
+  },
+  {
+    "id": "missing-1",
+    "family": "missing",
+    "query": {
+      "dateFrom": "2026-11-16T09:00:00.000Z",
+      "dateTo": "2026-11-16T13:00:00.000Z",
+      "calendars": [
+        "a",
+        "b"
+      ]
+    },
+    "frames": [
+      {
+        "outerStatus": 200,
+        "gzip": true,
+        "body": {
+          "responses": [
+            {
+              "id": "0",
+              "status": 200,
+              "body": {
+                "value": []
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "truth": {
+      "busy": [
+        {
+          "start": "2026-11-16T09:00:00.000Z",
+          "end": "2026-11-16T09:30:00.000Z"
+        }
+      ],
+      "unknown": [
+        "b"
+      ],
+      "errors": [
+        {
+          "calendar": "b",
+          "phase": "initial",
+          "reason": "missing-response"
+        }
+      ]
+    }
+  },
+  {
+    "id": "retry-recovered-1",
+    "family": "retry-recovered",
+    "query": {
+      "dateFrom": "2026-11-16T09:00:00.000Z",
+      "dateTo": "2026-11-16T13:00:00.000Z",
+      "calendars": [
+        "a",
+        "b"
+      ]
+    },
+    "frames": [
+      {
+        "outerStatus": 200,
+        "gzip": true,
+        "body": {
+          "responses": [
+            {
+              "id": "0",
+              "status": 429,
+              "headers": {
+                "Retry-After": "0"
+              },
+              "body": {
+                "error": {
+                  "code": "SyntheticFailure"
+                }
+              }
+            },
+            {
+              "id": "1",
+              "status": 200,
+              "body": {
+                "value": []
+              }
+            }
+          ]
+        }
+      },
+      {
+        "outerStatus": 200,
+        "gzip": true,
+        "body": {
+          "responses": [
+            {
+              "id": "0",
+              "status": 200,
+              "body": {
+                "value": [
+                  {
+                    "showAs": "busy",
+                    "start": {
+                      "dateTime": "2026-11-16T09:00:00"
+                    },
+                    "end": {
+                      "dateTime": "2026-11-16T09:30:00"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "truth": {
+      "busy": [
+        {
+          "start": "2026-11-16T09:00:00.000Z",
+          "end": "2026-11-16T09:30:00.000Z"
+        }
+      ],
+      "unknown": [],
+      "errors": []
+    }
+  },
+  {
+    "id": "retry-exhausted-1",
+    "family": "retry-exhausted",
+    "query": {
+      "dateFrom": "2026-11-16T09:00:00.000Z",
+      "dateTo": "2026-11-16T13:00:00.000Z",
+      "calendars": [
+        "a",
+        "b"
+      ]
+    },
+    "frames": [
+      {
+        "outerStatus": 200,
+        "gzip": true,
+        "body": {
+          "responses": [
+            {
+              "id": "0",
+              "status": 429,
+              "headers": {
+                "Retry-After": "0"
+              },
+              "body": {
+                "error": {
+                  "code": "SyntheticFailure"
+                }
+              }
+            },
+            {
+              "id": "1",
+              "status": 200,
+              "body": {
+                "value": []
+              }
+            }
+          ]
+        }
+      },
+      {
+        "outerStatus": 200,
+        "gzip": true,
+        "body": {
+          "responses": [
+            {
+              "id": "0",
+              "status": 429,
+              "headers": {
+                "Retry-After": "0"
+              },
+              "body": {
+                "error": {
+                  "code": "SyntheticFailure"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "outerStatus": 200,
+        "gzip": true,
+        "body": {
+          "responses": [
+            {
+              "id": "0",
+              "status": 429,
+              "headers": {
+                "Retry-After": "0"
+              },
+              "body": {
+                "error": {
+                  "code": "SyntheticFailure"
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "truth": {
+      "busy": [
+        {
+          "start": "2026-11-16T09:00:00.000Z",
+          "end": "2026-11-16T09:30:00.000Z"
+        }
+      ],
+      "unknown": [
+        "a"
+      ],
+      "errors": [
+        {
+          "calendar": "a",
+          "phase": "retry",
+          "reason": "HTTP 429"
+        }
+      ]
+    }
+  },
+  {
+    "id": "mixed-retry-error-1",
+    "family": "mixed-retry-error",
+    "query": {
+      "dateFrom": "2026-11-16T09:00:00.000Z",
+      "dateTo": "2026-11-16T13:00:00.000Z",
+      "calendars": [
+        "a",
+        "b"
+      ]
+    },
+    "frames": [
+      {
+        "outerStatus": 200,
+        "gzip": true,
+        "body": {
+          "responses": [
+            {
+              "id": "0",
+              "status": 429,
+              "headers": {
+                "Retry-After": "0"
+              },
+              "body": {
+                "error": {
+                  "code": "SyntheticFailure"
+                }
+              }
+            },
+            {
+              "id": "1",
+              "status": 503,
+              "headers": {
+                "Retry-After": "0"
+              },
+              "body": {
+                "error": {
+                  "code": "SyntheticFailure"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "outerStatus": 200,
+        "gzip": true,
+        "body": {
+          "responses": [
+            {
+              "id": "0",
+              "status": 200,
+              "body": {
+                "value": [
+                  {
+                    "showAs": "busy",
+                    "start": {
+                      "dateTime": "2026-11-16T09:00:00"
+                    },
+                    "end": {
+                      "dateTime": "2026-11-16T09:30:00"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "truth": {
+      "busy": [
+        {
+          "start": "2026-11-16T09:00:00.000Z",
+          "end": "2026-11-16T09:30:00.000Z"
+        }
+      ],
+      "unknown": [
+        "b"
+      ],
+      "errors": [
+        {
+          "calendar": "b",
+          "phase": "initial",
+          "reason": "HTTP 503"
+        }
+      ]
+    }
+  },
+  {
+    "id": "page-success-1",
+    "family": "page-success",
+    "query": {
+      "dateFrom": "2026-11-16T09:00:00.000Z",
+      "dateTo": "2026-11-16T13:00:00.000Z",
+      "calendars": [
+        "a",
+        "b"
+      ]
+    },
+    "frames": [
+      {
+        "outerStatus": 200,
+        "gzip": true,
+        "body": {
+          "responses": [
+            {
+              "id": "0",
+              "status": 200,
+              "body": {
+                "value": []
+              }
+            },
+            {
+              "id": "1",
+              "status": 200,
+              "body": {
+                "value": [],
+                "@odata.nextLink": "https://graph.microsoft.com/v1.0/me/calendars/b/calendarView?$skiptoken=synthetic-0"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "outerStatus": 200,
+        "gzip": true,
+        "body": {
+          "responses": [
+            {
+              "id": "1",
+              "status": 200,
+              "body": {
+                "value": [
+                  {
+                    "showAs": "busy",
+                    "start": {
+                      "dateTime": "2026-11-16T09:00:00"
+                    },
+                    "end": {
+                      "dateTime": "2026-11-16T09:30:00"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "truth": {
+      "busy": [
+        {
+          "start": "2026-11-16T09:00:00.000Z",
+          "end": "2026-11-16T09:30:00.000Z"
+        }
+      ],
+      "unknown": [],
+      "errors": []
+    }
+  },
+  {
+    "id": "page-failed-1",
+    "family": "page-failed",
+    "query": {
+      "dateFrom": "2026-11-16T09:00:00.000Z",
+      "dateTo": "2026-11-16T13:00:00.000Z",
+      "calendars": [
+        "a",
+        "b"
+      ]
+    },
+    "frames": [
+      {
+        "outerStatus": 200,
+        "gzip": true,
+        "body": {
+          "responses": [
+            {
+              "id": "0",
+              "status": 200,
+              "body": {
+                "value": []
+              }
+            },
+            {
+              "id": "1",
+              "status": 200,
+              "body": {
+                "value": [],
+                "@odata.nextLink": "https://graph.microsoft.com/v1.0/me/calendars/b/calendarView?$skiptoken=synthetic-0"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "outerStatus": 200,
+        "gzip": true,
+        "body": {
+          "responses": [
+            {
+              "id": "1",
+              "status": 503,
+              "headers": {
+                "Retry-After": "0"
+              },
+              "body": {
+                "error": {
+                  "code": "SyntheticFailure"
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "truth": {
+      "busy": [
+        {
+          "start": "2026-11-16T09:00:00.000Z",
+          "end": "2026-11-16T09:30:00.000Z"
+        }
+      ],
+      "unknown": [
+        "b"
+      ],
+      "errors": [
+        {
+          "calendar": "b",
+          "phase": "page",
+          "reason": "HTTP 503"
+        }
+      ]
+    }
+  },
+  {
+    "id": "clean-empty-2",
+    "family": "clean-empty",
+    "query": {
+      "dateFrom": "2026-11-16T09:00:00.000Z",
+      "dateTo": "2026-11-16T13:00:00.000Z",
+      "calendars": [
+        "a",
+        "b"
+      ]
+    },
+    "frames": [
+      {
+        "outerStatus": 200,
+        "gzip": true,
+        "body": {
+          "responses": [
+            {
+              "id": "1",
+              "status": 200,
+              "body": {
+                "value": []
+              }
+            },
+            {
+              "id": "0",
+              "status": 200,
+              "body": {
+                "value": []
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "truth": {
+      "busy": [],
+      "unknown": [],
+      "errors": []
+    }
+  },
+  {
+    "id": "clean-busy-2",
+    "family": "clean-busy",
+    "query": {
+      "dateFrom": "2026-11-16T09:00:00.000Z",
+      "dateTo": "2026-11-16T13:00:00.000Z",
+      "calendars": [
+        "a",
+        "b"
+      ]
+    },
+    "frames": [
+      {
+        "outerStatus": 200,
+        "gzip": true,
+        "body": {
+          "responses": [
+            {
+              "id": "1",
+              "status": 200,
+              "body": {
+                "value": [
+                  {
+                    "showAs": "busy",
+                    "start": {
+                      "dateTime": "2026-11-16T09:30:00"
+                    },
+                    "end": {
+                      "dateTime": "2026-11-16T10:00:00"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "id": "0",
+              "status": 200,
+              "body": {
+                "value": []
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "truth": {
+      "busy": [
+        {
+          "start": "2026-11-16T09:30:00.000Z",
+          "end": "2026-11-16T10:00:00.000Z"
+        }
+      ],
+      "unknown": [],
+      "errors": []
+    }
+  },
+  {
+    "id": "inner-403-2",
+    "family": "inner-403",
+    "query": {
+      "dateFrom": "2026-11-16T09:00:00.000Z",
+      "dateTo": "2026-11-16T13:00:00.000Z",
+      "calendars": [
+        "a",
+        "b"
+      ]
+    },
+    "frames": [
+      {
+        "outerStatus": 200,
+        "gzip": true,
+        "body": {
+          "responses": [
+            {
+              "id": "0",
+              "status": 200,
+              "body": {
+                "value": []
+              }
+            },
+            {
+              "id": "1",
+              "status": 403,
+              "headers": {
+                "Retry-After": "0"
+              },
+              "body": {
+                "error": {
+                  "code": "SyntheticFailure"
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "truth": {
+      "busy": [
+        {
+          "start": "2026-11-16T09:30:00.000Z",
+          "end": "2026-11-16T10:00:00.000Z"
+        }
+      ],
+      "unknown": [
+        "b"
+      ],
+      "errors": [
+        {
+          "calendar": "b",
+          "phase": "initial",
+          "reason": "HTTP 403"
+        }
+      ]
+    }
+  },
+  {
+    "id": "inner-503-2",
+    "family": "inner-503",
+    "query": {
+      "dateFrom": "2026-11-16T09:00:00.000Z",
+      "dateTo": "2026-11-16T13:00:00.000Z",
+      "calendars": [
+        "a",
+        "b"
+      ]
+    },
+    "frames": [
+      {
+        "outerStatus": 200,
+        "gzip": true,
+        "body": {
+          "responses": [
+            {
+              "id": "0",
+              "status": 200,
+              "body": {
+                "value": []
+              }
+            },
+            {
+              "id": "1",
+              "status": 503,
+              "headers": {
+                "Retry-After": "0"
+              },
+              "body": {
+                "error": {
+                  "code": "SyntheticFailure"
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "truth": {
+      "busy": [
+        {
+          "start": "2026-11-16T09:30:00.000Z",
+          "end": "2026-11-16T10:00:00.000Z"
+        }
+      ],
+      "unknown": [
+        "b"
+      ],
+      "errors": [
+        {
+          "calendar": "b",
+          "phase": "initial",
+          "reason": "HTTP 503"
+        }
+      ]
+    }
+  },
+  {
+    "id": "missing-2",
+    "family": "missing",
+    "query": {
+      "dateFrom": "2026-11-16T09:00:00.000Z",
+      "dateTo": "2026-11-16T13:00:00.000Z",
+      "calendars": [
+        "a",
+        "b"
+      ]
+    },
+    "frames": [
+      {
+        "outerStatus": 200,
+        "gzip": true,
+        "body": {
+          "responses": [
+            {
+              "id": "0",
+              "status": 200,
+              "body": {
+                "value": []
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "truth": {
+      "busy": [
+        {
+          "start": "2026-11-16T09:30:00.000Z",
+          "end": "2026-11-16T10:00:00.000Z"
+        }
+      ],
+      "unknown": [
+        "b"
+      ],
+      "errors": [
+        {
+          "calendar": "b",
+          "phase": "initial",
+          "reason": "missing-response"
+        }
+      ]
+    }
+  },
+  {
+    "id": "retry-recovered-2",
+    "family": "retry-recovered",
+    "query": {
+      "dateFrom": "2026-11-16T09:00:00.000Z",
+      "dateTo": "2026-11-16T13:00:00.000Z",
+      "calendars": [
+        "a",
+        "b"
+      ]
+    },
+    "frames": [
+      {
+        "outerStatus": 200,
+        "gzip": true,
+        "body": {
+          "responses": [
+            {
+              "id": "0",
+              "status": 429,
+              "headers": {
+                "Retry-After": "0"
+              },
+              "body": {
+                "error": {
+                  "code": "SyntheticFailure"
+                }
+              }
+            },
+            {
+              "id": "1",
+              "status": 200,
+              "body": {
+                "value": []
+              }
+            }
+          ]
+        }
+      },
+      {
+        "outerStatus": 200,
+        "gzip": true,
+        "body": {
+          "responses": [
+            {
+              "id": "0",
+              "status": 200,
+              "body": {
+                "value": [
+                  {
+                    "showAs": "busy",
+                    "start": {
+                      "dateTime": "2026-11-16T09:30:00"
+                    },
+                    "end": {
+                      "dateTime": "2026-11-16T10:00:00"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "truth": {
+      "busy": [
+        {
+          "start": "2026-11-16T09:30:00.000Z",
+          "end": "2026-11-16T10:00:00.000Z"
+        }
+      ],
+      "unknown": [],
+      "errors": []
+    }
+  },
+  {
+    "id": "retry-exhausted-2",
+    "family": "retry-exhausted",
+    "query": {
+      "dateFrom": "2026-11-16T09:00:00.000Z",
+      "dateTo": "2026-11-16T13:00:00.000Z",
+      "calendars": [
+        "a",
+        "b"
+      ]
+    },
+    "frames": [
+      {
+        "outerStatus": 200,
+        "gzip": true,
+        "body": {
+          "responses": [
+            {
+              "id": "0",
+              "status": 429,
+              "headers": {
+                "Retry-After": "0"
+              },
+              "body": {
+                "error": {
+                  "code": "SyntheticFailure"
+                }
+              }
+            },
+            {
+              "id": "1",
+              "status": 200,
+              "body": {
+                "value": []
+              }
+            }
+          ]
+        }
+      },
+      {
+        "outerStatus": 200,
+        "gzip": true,
+        "body": {
+          "responses": [
+            {
+              "id": "0",
+              "status": 429,
+              "headers": {
+                "Retry-After": "0"
+              },
+              "body": {
+                "error": {
+                  "code": "SyntheticFailure"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "outerStatus": 200,
+        "gzip": true,
+        "body": {
+          "responses": [
+            {
+              "id": "0",
+              "status": 429,
+              "headers": {
+                "Retry-After": "0"
+              },
+              "body": {
+                "error": {
+                  "code": "SyntheticFailure"
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "truth": {
+      "busy": [
+        {
+          "start": "2026-11-16T09:30:00.000Z",
+          "end": "2026-11-16T10:00:00.000Z"
+        }
+      ],
+      "unknown": [
+        "a"
+      ],
+      "errors": [
+        {
+          "calendar": "a",
+          "phase": "retry",
+          "reason": "HTTP 429"
+        }
+      ]
+    }
+  },
+  {
+    "id": "mixed-retry-error-2",
+    "family": "mixed-retry-error",
+    "query": {
+      "dateFrom": "2026-11-16T09:00:00.000Z",
+      "dateTo": "2026-11-16T13:00:00.000Z",
+      "calendars": [
+        "a",
+        "b"
+      ]
+    },
+    "frames": [
+      {
+        "outerStatus": 200,
+        "gzip": true,
+        "body": {
+          "responses": [
+            {
+              "id": "0",
+              "status": 429,
+              "headers": {
+                "Retry-After": "0"
+              },
+              "body": {
+                "error": {
+                  "code": "SyntheticFailure"
+                }
+              }
+            },
+            {
+              "id": "1",
+              "status": 503,
+              "headers": {
+                "Retry-After": "0"
+              },
+              "body": {
+                "error": {
+                  "code": "SyntheticFailure"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "outerStatus": 200,
+        "gzip": true,
+        "body": {
+          "responses": [
+            {
+              "id": "0",
+              "status": 200,
+              "body": {
+                "value": [
+                  {
+                    "showAs": "busy",
+                    "start": {
+                      "dateTime": "2026-11-16T09:30:00"
+                    },
+                    "end": {
+                      "dateTime": "2026-11-16T10:00:00"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "truth": {
+      "busy": [
+        {
+          "start": "2026-11-16T09:30:00.000Z",
+          "end": "2026-11-16T10:00:00.000Z"
+        }
+      ],
+      "unknown": [
+        "b"
+      ],
+      "errors": [
+        {
+          "calendar": "b",
+          "phase": "initial",
+          "reason": "HTTP 503"
+        }
+      ]
+    }
+  },
+  {
+    "id": "page-success-2",
+    "family": "page-success",
+    "query": {
+      "dateFrom": "2026-11-16T09:00:00.000Z",
+      "dateTo": "2026-11-16T13:00:00.000Z",
+      "calendars": [
+        "a",
+        "b"
+      ]
+    },
+    "frames": [
+      {
+        "outerStatus": 200,
+        "gzip": true,
+        "body": {
+          "responses": [
+            {
+              "id": "0",
+              "status": 200,
+              "body": {
+                "value": []
+              }
+            },
+            {
+              "id": "1",
+              "status": 200,
+              "body": {
+                "value": [],
+                "@odata.nextLink": "https://graph.microsoft.com/v1.0/me/calendars/b/calendarView?$skiptoken=synthetic-1"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "outerStatus": 200,
+        "gzip": true,
+        "body": {
+          "responses": [
+            {
+              "id": "1",
+              "status": 200,
+              "body": {
+                "value": [
+                  {
+                    "showAs": "busy",
+                    "start": {
+                      "dateTime": "2026-11-16T09:30:00"
+                    },
+                    "end": {
+                      "dateTime": "2026-11-16T10:00:00"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "truth": {
+      "busy": [
+        {
+          "start": "2026-11-16T09:30:00.000Z",
+          "end": "2026-11-16T10:00:00.000Z"
+        }
+      ],
+      "unknown": [],
+      "errors": []
+    }
+  },
+  {
+    "id": "page-failed-2",
+    "family": "page-failed",
+    "query": {
+      "dateFrom": "2026-11-16T09:00:00.000Z",
+      "dateTo": "2026-11-16T13:00:00.000Z",
+      "calendars": [
+        "a",
+        "b"
+      ]
+    },
+    "frames": [
+      {
+        "outerStatus": 200,
+        "gzip": true,
+        "body": {
+          "responses": [
+            {
+              "id": "0",
+              "status": 200,
+              "body": {
+                "value": []
+              }
+            },
+            {
+              "id": "1",
+              "status": 200,
+              "body": {
+                "value": [],
+                "@odata.nextLink": "https://graph.microsoft.com/v1.0/me/calendars/b/calendarView?$skiptoken=synthetic-1"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "outerStatus": 200,
+        "gzip": true,
+        "body": {
+          "responses": [
+            {
+              "id": "1",
+              "status": 503,
+              "headers": {
+                "Retry-After": "0"
+              },
+              "body": {
+                "error": {
+                  "code": "SyntheticFailure"
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "truth": {
+      "busy": [
+        {
+          "start": "2026-11-16T09:30:00.000Z",
+          "end": "2026-11-16T10:00:00.000Z"
+        }
+      ],
+      "unknown": [
+        "b"
+      ],
+      "errors": [
+        {
+          "calendar": "b",
+          "phase": "page",
+          "reason": "HTTP 503"
+        }
+      ]
+    }
+  },
+  {
+    "id": "clean-empty-3",
+    "family": "clean-empty",
+    "query": {
+      "dateFrom": "2026-11-16T09:00:00.000Z",
+      "dateTo": "2026-11-16T13:00:00.000Z",
+      "calendars": [
+        "a",
+        "b"
+      ]
+    },
+    "frames": [
+      {
+        "outerStatus": 200,
+        "gzip": true,
+        "body": {
+          "responses": [
+            {
+              "id": "1",
+              "status": 200,
+              "body": {
+                "value": []
+              }
+            },
+            {
+              "id": "0",
+              "status": 200,
+              "body": {
+                "value": []
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "truth": {
+      "busy": [],
+      "unknown": [],
+      "errors": []
+    }
+  },
+  {
+    "id": "clean-busy-3",
+    "family": "clean-busy",
+    "query": {
+      "dateFrom": "2026-11-16T09:00:00.000Z",
+      "dateTo": "2026-11-16T13:00:00.000Z",
+      "calendars": [
+        "a",
+        "b"
+      ]
+    },
+    "frames": [
+      {
+        "outerStatus": 200,
+        "gzip": true,
+        "body": {
+          "responses": [
+            {
+              "id": "1",
+              "status": 200,
+              "body": {
+                "value": [
+                  {
+                    "showAs": "busy",
+                    "start": {
+                      "dateTime": "2026-11-16T10:00:00"
+                    },
+                    "end": {
+                      "dateTime": "2026-11-16T10:30:00"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "id": "0",
+              "status": 200,
+              "body": {
+                "value": []
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "truth": {
+      "busy": [
+        {
+          "start": "2026-11-16T10:00:00.000Z",
+          "end": "2026-11-16T10:30:00.000Z"
+        }
+      ],
+      "unknown": [],
+      "errors": []
+    }
+  },
+  {
+    "id": "inner-403-3",
+    "family": "inner-403",
+    "query": {
+      "dateFrom": "2026-11-16T09:00:00.000Z",
+      "dateTo": "2026-11-16T13:00:00.000Z",
+      "calendars": [
+        "a",
+        "b"
+      ]
+    },
+    "frames": [
+      {
+        "outerStatus": 200,
+        "gzip": true,
+        "body": {
+          "responses": [
+            {
+              "id": "0",
+              "status": 200,
+              "body": {
+                "value": []
+              }
+            },
+            {
+              "id": "1",
+              "status": 403,
+              "headers": {
+                "Retry-After": "0"
+              },
+              "body": {
+                "error": {
+                  "code": "SyntheticFailure"
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "truth": {
+      "busy": [
+        {
+          "start": "2026-11-16T10:00:00.000Z",
+          "end": "2026-11-16T10:30:00.000Z"
+        }
+      ],
+      "unknown": [
+        "b"
+      ],
+      "errors": [
+        {
+          "calendar": "b",
+          "phase": "initial",
+          "reason": "HTTP 403"
+        }
+      ]
+    }
+  },
+  {
+    "id": "inner-503-3",
+    "family": "inner-503",
+    "query": {
+      "dateFrom": "2026-11-16T09:00:00.000Z",
+      "dateTo": "2026-11-16T13:00:00.000Z",
+      "calendars": [
+        "a",
+        "b"
+      ]
+    },
+    "frames": [
+      {
+        "outerStatus": 200,
+        "gzip": true,
+        "body": {
+          "responses": [
+            {
+              "id": "0",
+              "status": 200,
+              "body": {
+                "value": []
+              }
+            },
+            {
+              "id": "1",
+              "status": 503,
+              "headers": {
+                "Retry-After": "0"
+              },
+              "body": {
+                "error": {
+                  "code": "SyntheticFailure"
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "truth": {
+      "busy": [
+        {
+          "start": "2026-11-16T10:00:00.000Z",
+          "end": "2026-11-16T10:30:00.000Z"
+        }
+      ],
+      "unknown": [
+        "b"
+      ],
+      "errors": [
+        {
+          "calendar": "b",
+          "phase": "initial",
+          "reason": "HTTP 503"
+        }
+      ]
+    }
+  },
+  {
+    "id": "missing-3",
+    "family": "missing",
+    "query": {
+      "dateFrom": "2026-11-16T09:00:00.000Z",
+      "dateTo": "2026-11-16T13:00:00.000Z",
+      "calendars": [
+        "a",
+        "b"
+      ]
+    },
+    "frames": [
+      {
+        "outerStatus": 200,
+        "gzip": true,
+        "body": {
+          "responses": [
+            {
+              "id": "0",
+              "status": 200,
+              "body": {
+                "value": []
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "truth": {
+      "busy": [
+        {
+          "start": "2026-11-16T10:00:00.000Z",
+          "end": "2026-11-16T10:30:00.000Z"
+        }
+      ],
+      "unknown": [
+        "b"
+      ],
+      "errors": [
+        {
+          "calendar": "b",
+          "phase": "initial",
+          "reason": "missing-response"
+        }
+      ]
+    }
+  },
+  {
+    "id": "retry-recovered-3",
+    "family": "retry-recovered",
+    "query": {
+      "dateFrom": "2026-11-16T09:00:00.000Z",
+      "dateTo": "2026-11-16T13:00:00.000Z",
+      "calendars": [
+        "a",
+        "b"
+      ]
+    },
+    "frames": [
+      {
+        "outerStatus": 200,
+        "gzip": true,
+        "body": {
+          "responses": [
+            {
+              "id": "0",
+              "status": 429,
+              "headers": {
+                "Retry-After": "0"
+              },
+              "body": {
+                "error": {
+                  "code": "SyntheticFailure"
+                }
+              }
+            },
+            {
+              "id": "1",
+              "status": 200,
+              "body": {
+                "value": []
+              }
+            }
+          ]
+        }
+      },
+      {
+        "outerStatus": 200,
+        "gzip": true,
+        "body": {
+          "responses": [
+            {
+              "id": "0",
+              "status": 200,
+              "body": {
+                "value": [
+                  {
+                    "showAs": "busy",
+                    "start": {
+                      "dateTime": "2026-11-16T10:00:00"
+                    },
+                    "end": {
+                      "dateTime": "2026-11-16T10:30:00"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "truth": {
+      "busy": [
+        {
+          "start": "2026-11-16T10:00:00.000Z",
+          "end": "2026-11-16T10:30:00.000Z"
+        }
+      ],
+      "unknown": [],
+      "errors": []
+    }
+  },
+  {
+    "id": "retry-exhausted-3",
+    "family": "retry-exhausted",
+    "query": {
+      "dateFrom": "2026-11-16T09:00:00.000Z",
+      "dateTo": "2026-11-16T13:00:00.000Z",
+      "calendars": [
+        "a",
+        "b"
+      ]
+    },
+    "frames": [
+      {
+        "outerStatus": 200,
+        "gzip": true,
+        "body": {
+          "responses": [
+            {
+              "id": "0",
+              "status": 429,
+              "headers": {
+                "Retry-After": "0"
+              },
+              "body": {
+                "error": {
+                  "code": "SyntheticFailure"
+                }
+              }
+            },
+            {
+              "id": "1",
+              "status": 200,
+              "body": {
+                "value": []
+              }
+            }
+          ]
+        }
+      },
+      {
+        "outerStatus": 200,
+        "gzip": true,
+        "body": {
+          "responses": [
+            {
+              "id": "0",
+              "status": 429,
+              "headers": {
+                "Retry-After": "0"
+              },
+              "body": {
+                "error": {
+                  "code": "SyntheticFailure"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "outerStatus": 200,
+        "gzip": true,
+        "body": {
+          "responses": [
+            {
+              "id": "0",
+              "status": 429,
+              "headers": {
+                "Retry-After": "0"
+              },
+              "body": {
+                "error": {
+                  "code": "SyntheticFailure"
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "truth": {
+      "busy": [
+        {
+          "start": "2026-11-16T10:00:00.000Z",
+          "end": "2026-11-16T10:30:00.000Z"
+        }
+      ],
+      "unknown": [
+        "a"
+      ],
+      "errors": [
+        {
+          "calendar": "a",
+          "phase": "retry",
+          "reason": "HTTP 429"
+        }
+      ]
+    }
+  },
+  {
+    "id": "mixed-retry-error-3",
+    "family": "mixed-retry-error",
+    "query": {
+      "dateFrom": "2026-11-16T09:00:00.000Z",
+      "dateTo": "2026-11-16T13:00:00.000Z",
+      "calendars": [
+        "a",
+        "b"
+      ]
+    },
+    "frames": [
+      {
+        "outerStatus": 200,
+        "gzip": true,
+        "body": {
+          "responses": [
+            {
+              "id": "0",
+              "status": 429,
+              "headers": {
+                "Retry-After": "0"
+              },
+              "body": {
+                "error": {
+                  "code": "SyntheticFailure"
+                }
+              }
+            },
+            {
+              "id": "1",
+              "status": 503,
+              "headers": {
+                "Retry-After": "0"
+              },
+              "body": {
+                "error": {
+                  "code": "SyntheticFailure"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "outerStatus": 200,
+        "gzip": true,
+        "body": {
+          "responses": [
+            {
+              "id": "0",
+              "status": 200,
+              "body": {
+                "value": [
+                  {
+                    "showAs": "busy",
+                    "start": {
+                      "dateTime": "2026-11-16T10:00:00"
+                    },
+                    "end": {
+                      "dateTime": "2026-11-16T10:30:00"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "truth": {
+      "busy": [
+        {
+          "start": "2026-11-16T10:00:00.000Z",
+          "end": "2026-11-16T10:30:00.000Z"
+        }
+      ],
+      "unknown": [
+        "b"
+      ],
+      "errors": [
+        {
+          "calendar": "b",
+          "phase": "initial",
+          "reason": "HTTP 503"
+        }
+      ]
+    }
+  },
+  {
+    "id": "page-success-3",
+    "family": "page-success",
+    "query": {
+      "dateFrom": "2026-11-16T09:00:00.000Z",
+      "dateTo": "2026-11-16T13:00:00.000Z",
+      "calendars": [
+        "a",
+        "b"
+      ]
+    },
+    "frames": [
+      {
+        "outerStatus": 200,
+        "gzip": true,
+        "body": {
+          "responses": [
+            {
+              "id": "0",
+              "status": 200,
+              "body": {
+                "value": []
+              }
+            },
+            {
+              "id": "1",
+              "status": 200,
+              "body": {
+                "value": [],
+                "@odata.nextLink": "https://graph.microsoft.com/v1.0/me/calendars/b/calendarView?$skiptoken=synthetic-2"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "outerStatus": 200,
+        "gzip": true,
+        "body": {
+          "responses": [
+            {
+              "id": "1",
+              "status": 200,
+              "body": {
+                "value": [
+                  {
+                    "showAs": "busy",
+                    "start": {
+                      "dateTime": "2026-11-16T10:00:00"
+                    },
+                    "end": {
+                      "dateTime": "2026-11-16T10:30:00"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "truth": {
+      "busy": [
+        {
+          "start": "2026-11-16T10:00:00.000Z",
+          "end": "2026-11-16T10:30:00.000Z"
+        }
+      ],
+      "unknown": [],
+      "errors": []
+    }
+  },
+  {
+    "id": "page-failed-3",
+    "family": "page-failed",
+    "query": {
+      "dateFrom": "2026-11-16T09:00:00.000Z",
+      "dateTo": "2026-11-16T13:00:00.000Z",
+      "calendars": [
+        "a",
+        "b"
+      ]
+    },
+    "frames": [
+      {
+        "outerStatus": 200,
+        "gzip": true,
+        "body": {
+          "responses": [
+            {
+              "id": "0",
+              "status": 200,
+              "body": {
+                "value": []
+              }
+            },
+            {
+              "id": "1",
+              "status": 200,
+              "body": {
+                "value": [],
+                "@odata.nextLink": "https://graph.microsoft.com/v1.0/me/calendars/b/calendarView?$skiptoken=synthetic-2"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "outerStatus": 200,
+        "gzip": true,
+        "body": {
+          "responses": [
+            {
+              "id": "1",
+              "status": 503,
+              "headers": {
+                "Retry-After": "0"
+              },
+              "body": {
+                "error": {
+                  "code": "SyntheticFailure"
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "truth": {
+      "busy": [
+        {
+          "start": "2026-11-16T10:00:00.000Z",
+          "end": "2026-11-16T10:30:00.000Z"
+        }
+      ],
+      "unknown": [
+        "b"
+      ],
+      "errors": [
+        {
+          "calendar": "b",
+          "phase": "page",
+          "reason": "HTTP 503"
+        }
+      ]
+    }
+  },
+  {
+    "id": "clean-empty-4",
+    "family": "clean-empty",
+    "query": {
+      "dateFrom": "2026-11-16T09:00:00.000Z",
+      "dateTo": "2026-11-16T13:00:00.000Z",
+      "calendars": [
+        "a",
+        "b"
+      ]
+    },
+    "frames": [
+      {
+        "outerStatus": 200,
+        "gzip": true,
+        "body": {
+          "responses": [
+            {
+              "id": "1",
+              "status": 200,
+              "body": {
+                "value": []
+              }
+            },
+            {
+              "id": "0",
+              "status": 200,
+              "body": {
+                "value": []
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "truth": {
+      "busy": [],
+      "unknown": [],
+      "errors": []
+    }
+  },
+  {
+    "id": "clean-busy-4",
+    "family": "clean-busy",
+    "query": {
+      "dateFrom": "2026-11-16T09:00:00.000Z",
+      "dateTo": "2026-11-16T13:00:00.000Z",
+      "calendars": [
+        "a",
+        "b"
+      ]
+    },
+    "frames": [
+      {
+        "outerStatus": 200,
+        "gzip": true,
+        "body": {
+          "responses": [
+            {
+              "id": "1",
+              "status": 200,
+              "body": {
+                "value": [
+                  {
+                    "showAs": "busy",
+                    "start": {
+                      "dateTime": "2026-11-16T10:30:00"
+                    },
+                    "end": {
+                      "dateTime": "2026-11-16T11:00:00"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "id": "0",
+              "status": 200,
+              "body": {
+                "value": []
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "truth": {
+      "busy": [
+        {
+          "start": "2026-11-16T10:30:00.000Z",
+          "end": "2026-11-16T11:00:00.000Z"
+        }
+      ],
+      "unknown": [],
+      "errors": []
+    }
+  },
+  {
+    "id": "inner-403-4",
+    "family": "inner-403",
+    "query": {
+      "dateFrom": "2026-11-16T09:00:00.000Z",
+      "dateTo": "2026-11-16T13:00:00.000Z",
+      "calendars": [
+        "a",
+        "b"
+      ]
+    },
+    "frames": [
+      {
+        "outerStatus": 200,
+        "gzip": true,
+        "body": {
+          "responses": [
+            {
+              "id": "0",
+              "status": 200,
+              "body": {
+                "value": []
+              }
+            },
+            {
+              "id": "1",
+              "status": 403,
+              "headers": {
+                "Retry-After": "0"
+              },
+              "body": {
+                "error": {
+                  "code": "SyntheticFailure"
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "truth": {
+      "busy": [
+        {
+          "start": "2026-11-16T10:30:00.000Z",
+          "end": "2026-11-16T11:00:00.000Z"
+        }
+      ],
+      "unknown": [
+        "b"
+      ],
+      "errors": [
+        {
+          "calendar": "b",
+          "phase": "initial",
+          "reason": "HTTP 403"
+        }
+      ]
+    }
+  },
+  {
+    "id": "inner-503-4",
+    "family": "inner-503",
+    "query": {
+      "dateFrom": "2026-11-16T09:00:00.000Z",
+      "dateTo": "2026-11-16T13:00:00.000Z",
+      "calendars": [
+        "a",
+        "b"
+      ]
+    },
+    "frames": [
+      {
+        "outerStatus": 200,
+        "gzip": true,
+        "body": {
+          "responses": [
+            {
+              "id": "0",
+              "status": 200,
+              "body": {
+                "value": []
+              }
+            },
+            {
+              "id": "1",
+              "status": 503,
+              "headers": {
+                "Retry-After": "0"
+              },
+              "body": {
+                "error": {
+                  "code": "SyntheticFailure"
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "truth": {
+      "busy": [
+        {
+          "start": "2026-11-16T10:30:00.000Z",
+          "end": "2026-11-16T11:00:00.000Z"
+        }
+      ],
+      "unknown": [
+        "b"
+      ],
+      "errors": [
+        {
+          "calendar": "b",
+          "phase": "initial",
+          "reason": "HTTP 503"
+        }
+      ]
+    }
+  },
+  {
+    "id": "missing-4",
+    "family": "missing",
+    "query": {
+      "dateFrom": "2026-11-16T09:00:00.000Z",
+      "dateTo": "2026-11-16T13:00:00.000Z",
+      "calendars": [
+        "a",
+        "b"
+      ]
+    },
+    "frames": [
+      {
+        "outerStatus": 200,
+        "gzip": true,
+        "body": {
+          "responses": [
+            {
+              "id": "0",
+              "status": 200,
+              "body": {
+                "value": []
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "truth": {
+      "busy": [
+        {
+          "start": "2026-11-16T10:30:00.000Z",
+          "end": "2026-11-16T11:00:00.000Z"
+        }
+      ],
+      "unknown": [
+        "b"
+      ],
+      "errors": [
+        {
+          "calendar": "b",
+          "phase": "initial",
+          "reason": "missing-response"
+        }
+      ]
+    }
+  },
+  {
+    "id": "retry-recovered-4",
+    "family": "retry-recovered",
+    "query": {
+      "dateFrom": "2026-11-16T09:00:00.000Z",
+      "dateTo": "2026-11-16T13:00:00.000Z",
+      "calendars": [
+        "a",
+        "b"
+      ]
+    },
+    "frames": [
+      {
+        "outerStatus": 200,
+        "gzip": true,
+        "body": {
+          "responses": [
+            {
+              "id": "0",
+              "status": 429,
+              "headers": {
+                "Retry-After": "0"
+              },
+              "body": {
+                "error": {
+                  "code": "SyntheticFailure"
+                }
+              }
+            },
+            {
+              "id": "1",
+              "status": 200,
+              "body": {
+                "value": []
+              }
+            }
+          ]
+        }
+      },
+      {
+        "outerStatus": 200,
+        "gzip": true,
+        "body": {
+          "responses": [
+            {
+              "id": "0",
+              "status": 200,
+              "body": {
+                "value": [
+                  {
+                    "showAs": "busy",
+                    "start": {
+                      "dateTime": "2026-11-16T10:30:00"
+                    },
+                    "end": {
+                      "dateTime": "2026-11-16T11:00:00"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "truth": {
+      "busy": [
+        {
+          "start": "2026-11-16T10:30:00.000Z",
+          "end": "2026-11-16T11:00:00.000Z"
+        }
+      ],
+      "unknown": [],
+      "errors": []
+    }
+  },
+  {
+    "id": "retry-exhausted-4",
+    "family": "retry-exhausted",
+    "query": {
+      "dateFrom": "2026-11-16T09:00:00.000Z",
+      "dateTo": "2026-11-16T13:00:00.000Z",
+      "calendars": [
+        "a",
+        "b"
+      ]
+    },
+    "frames": [
+      {
+        "outerStatus": 200,
+        "gzip": true,
+        "body": {
+          "responses": [
+            {
+              "id": "0",
+              "status": 429,
+              "headers": {
+                "Retry-After": "0"
+              },
+              "body": {
+                "error": {
+                  "code": "SyntheticFailure"
+                }
+              }
+            },
+            {
+              "id": "1",
+              "status": 200,
+              "body": {
+                "value": []
+              }
+            }
+          ]
+        }
+      },
+      {
+        "outerStatus": 200,
+        "gzip": true,
+        "body": {
+          "responses": [
+            {
+              "id": "0",
+              "status": 429,
+              "headers": {
+                "Retry-After": "0"
+              },
+              "body": {
+                "error": {
+                  "code": "SyntheticFailure"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "outerStatus": 200,
+        "gzip": true,
+        "body": {
+          "responses": [
+            {
+              "id": "0",
+              "status": 429,
+              "headers": {
+                "Retry-After": "0"
+              },
+              "body": {
+                "error": {
+                  "code": "SyntheticFailure"
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "truth": {
+      "busy": [
+        {
+          "start": "2026-11-16T10:30:00.000Z",
+          "end": "2026-11-16T11:00:00.000Z"
+        }
+      ],
+      "unknown": [
+        "a"
+      ],
+      "errors": [
+        {
+          "calendar": "a",
+          "phase": "retry",
+          "reason": "HTTP 429"
+        }
+      ]
+    }
+  },
+  {
+    "id": "mixed-retry-error-4",
+    "family": "mixed-retry-error",
+    "query": {
+      "dateFrom": "2026-11-16T09:00:00.000Z",
+      "dateTo": "2026-11-16T13:00:00.000Z",
+      "calendars": [
+        "a",
+        "b"
+      ]
+    },
+    "frames": [
+      {
+        "outerStatus": 200,
+        "gzip": true,
+        "body": {
+          "responses": [
+            {
+              "id": "0",
+              "status": 429,
+              "headers": {
+                "Retry-After": "0"
+              },
+              "body": {
+                "error": {
+                  "code": "SyntheticFailure"
+                }
+              }
+            },
+            {
+              "id": "1",
+              "status": 503,
+              "headers": {
+                "Retry-After": "0"
+              },
+              "body": {
+                "error": {
+                  "code": "SyntheticFailure"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "outerStatus": 200,
+        "gzip": true,
+        "body": {
+          "responses": [
+            {
+              "id": "0",
+              "status": 200,
+              "body": {
+                "value": [
+                  {
+                    "showAs": "busy",
+                    "start": {
+                      "dateTime": "2026-11-16T10:30:00"
+                    },
+                    "end": {
+                      "dateTime": "2026-11-16T11:00:00"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "truth": {
+      "busy": [
+        {
+          "start": "2026-11-16T10:30:00.000Z",
+          "end": "2026-11-16T11:00:00.000Z"
+        }
+      ],
+      "unknown": [
+        "b"
+      ],
+      "errors": [
+        {
+          "calendar": "b",
+          "phase": "initial",
+          "reason": "HTTP 503"
+        }
+      ]
+    }
+  },
+  {
+    "id": "page-success-4",
+    "family": "page-success",
+    "query": {
+      "dateFrom": "2026-11-16T09:00:00.000Z",
+      "dateTo": "2026-11-16T13:00:00.000Z",
+      "calendars": [
+        "a",
+        "b"
+      ]
+    },
+    "frames": [
+      {
+        "outerStatus": 200,
+        "gzip": true,
+        "body": {
+          "responses": [
+            {
+              "id": "0",
+              "status": 200,
+              "body": {
+                "value": []
+              }
+            },
+            {
+              "id": "1",
+              "status": 200,
+              "body": {
+                "value": [],
+                "@odata.nextLink": "https://graph.microsoft.com/v1.0/me/calendars/b/calendarView?$skiptoken=synthetic-3"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "outerStatus": 200,
+        "gzip": true,
+        "body": {
+          "responses": [
+            {
+              "id": "1",
+              "status": 200,
+              "body": {
+                "value": [
+                  {
+                    "showAs": "busy",
+                    "start": {
+                      "dateTime": "2026-11-16T10:30:00"
+                    },
+                    "end": {
+                      "dateTime": "2026-11-16T11:00:00"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "truth": {
+      "busy": [
+        {
+          "start": "2026-11-16T10:30:00.000Z",
+          "end": "2026-11-16T11:00:00.000Z"
+        }
+      ],
+      "unknown": [],
+      "errors": []
+    }
+  },
+  {
+    "id": "page-failed-4",
+    "family": "page-failed",
+    "query": {
+      "dateFrom": "2026-11-16T09:00:00.000Z",
+      "dateTo": "2026-11-16T13:00:00.000Z",
+      "calendars": [
+        "a",
+        "b"
+      ]
+    },
+    "frames": [
+      {
+        "outerStatus": 200,
+        "gzip": true,
+        "body": {
+          "responses": [
+            {
+              "id": "0",
+              "status": 200,
+              "body": {
+                "value": []
+              }
+            },
+            {
+              "id": "1",
+              "status": 200,
+              "body": {
+                "value": [],
+                "@odata.nextLink": "https://graph.microsoft.com/v1.0/me/calendars/b/calendarView?$skiptoken=synthetic-3"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "outerStatus": 200,
+        "gzip": true,
+        "body": {
+          "responses": [
+            {
+              "id": "1",
+              "status": 503,
+              "headers": {
+                "Retry-After": "0"
+              },
+              "body": {
+                "error": {
+                  "code": "SyntheticFailure"
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "truth": {
+      "busy": [
+        {
+          "start": "2026-11-16T10:30:00.000Z",
+          "end": "2026-11-16T11:00:00.000Z"
+        }
+      ],
+      "unknown": [
+        "b"
+      ],
+      "errors": [
+        {
+          "calendar": "b",
+          "phase": "page",
+          "reason": "HTTP 503"
+        }
+      ]
+    }
+  },
+  {
+    "id": "clean-empty-5",
+    "family": "clean-empty",
+    "query": {
+      "dateFrom": "2026-11-16T09:00:00.000Z",
+      "dateTo": "2026-11-16T13:00:00.000Z",
+      "calendars": [
+        "a",
+        "b"
+      ]
+    },
+    "frames": [
+      {
+        "outerStatus": 200,
+        "gzip": true,
+        "body": {
+          "responses": [
+            {
+              "id": "1",
+              "status": 200,
+              "body": {
+                "value": []
+              }
+            },
+            {
+              "id": "0",
+              "status": 200,
+              "body": {
+                "value": []
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "truth": {
+      "busy": [],
+      "unknown": [],
+      "errors": []
+    }
+  },
+  {
+    "id": "clean-busy-5",
+    "family": "clean-busy",
+    "query": {
+      "dateFrom": "2026-11-16T09:00:00.000Z",
+      "dateTo": "2026-11-16T13:00:00.000Z",
+      "calendars": [
+        "a",
+        "b"
+      ]
+    },
+    "frames": [
+      {
+        "outerStatus": 200,
+        "gzip": true,
+        "body": {
+          "responses": [
+            {
+              "id": "1",
+              "status": 200,
+              "body": {
+                "value": [
+                  {
+                    "showAs": "busy",
+                    "start": {
+                      "dateTime": "2026-11-16T11:00:00"
+                    },
+                    "end": {
+                      "dateTime": "2026-11-16T11:30:00"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "id": "0",
+              "status": 200,
+              "body": {
+                "value": []
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "truth": {
+      "busy": [
+        {
+          "start": "2026-11-16T11:00:00.000Z",
+          "end": "2026-11-16T11:30:00.000Z"
+        }
+      ],
+      "unknown": [],
+      "errors": []
+    }
+  },
+  {
+    "id": "inner-403-5",
+    "family": "inner-403",
+    "query": {
+      "dateFrom": "2026-11-16T09:00:00.000Z",
+      "dateTo": "2026-11-16T13:00:00.000Z",
+      "calendars": [
+        "a",
+        "b"
+      ]
+    },
+    "frames": [
+      {
+        "outerStatus": 200,
+        "gzip": true,
+        "body": {
+          "responses": [
+            {
+              "id": "0",
+              "status": 200,
+              "body": {
+                "value": []
+              }
+            },
+            {
+              "id": "1",
+              "status": 403,
+              "headers": {
+                "Retry-After": "0"
+              },
+              "body": {
+                "error": {
+                  "code": "SyntheticFailure"
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "truth": {
+      "busy": [
+        {
+          "start": "2026-11-16T11:00:00.000Z",
+          "end": "2026-11-16T11:30:00.000Z"
+        }
+      ],
+      "unknown": [
+        "b"
+      ],
+      "errors": [
+        {
+          "calendar": "b",
+          "phase": "initial",
+          "reason": "HTTP 403"
+        }
+      ]
+    }
+  },
+  {
+    "id": "inner-503-5",
+    "family": "inner-503",
+    "query": {
+      "dateFrom": "2026-11-16T09:00:00.000Z",
+      "dateTo": "2026-11-16T13:00:00.000Z",
+      "calendars": [
+        "a",
+        "b"
+      ]
+    },
+    "frames": [
+      {
+        "outerStatus": 200,
+        "gzip": true,
+        "body": {
+          "responses": [
+            {
+              "id": "0",
+              "status": 200,
+              "body": {
+                "value": []
+              }
+            },
+            {
+              "id": "1",
+              "status": 503,
+              "headers": {
+                "Retry-After": "0"
+              },
+              "body": {
+                "error": {
+                  "code": "SyntheticFailure"
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "truth": {
+      "busy": [
+        {
+          "start": "2026-11-16T11:00:00.000Z",
+          "end": "2026-11-16T11:30:00.000Z"
+        }
+      ],
+      "unknown": [
+        "b"
+      ],
+      "errors": [
+        {
+          "calendar": "b",
+          "phase": "initial",
+          "reason": "HTTP 503"
+        }
+      ]
+    }
+  },
+  {
+    "id": "missing-5",
+    "family": "missing",
+    "query": {
+      "dateFrom": "2026-11-16T09:00:00.000Z",
+      "dateTo": "2026-11-16T13:00:00.000Z",
+      "calendars": [
+        "a",
+        "b"
+      ]
+    },
+    "frames": [
+      {
+        "outerStatus": 200,
+        "gzip": true,
+        "body": {
+          "responses": [
+            {
+              "id": "0",
+              "status": 200,
+              "body": {
+                "value": []
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "truth": {
+      "busy": [
+        {
+          "start": "2026-11-16T11:00:00.000Z",
+          "end": "2026-11-16T11:30:00.000Z"
+        }
+      ],
+      "unknown": [
+        "b"
+      ],
+      "errors": [
+        {
+          "calendar": "b",
+          "phase": "initial",
+          "reason": "missing-response"
+        }
+      ]
+    }
+  },
+  {
+    "id": "retry-recovered-5",
+    "family": "retry-recovered",
+    "query": {
+      "dateFrom": "2026-11-16T09:00:00.000Z",
+      "dateTo": "2026-11-16T13:00:00.000Z",
+      "calendars": [
+        "a",
+        "b"
+      ]
+    },
+    "frames": [
+      {
+        "outerStatus": 200,
+        "gzip": true,
+        "body": {
+          "responses": [
+            {
+              "id": "0",
+              "status": 429,
+              "headers": {
+                "Retry-After": "0"
+              },
+              "body": {
+                "error": {
+                  "code": "SyntheticFailure"
+                }
+              }
+            },
+            {
+              "id": "1",
+              "status": 200,
+              "body": {
+                "value": []
+              }
+            }
+          ]
+        }
+      },
+      {
+        "outerStatus": 200,
+        "gzip": true,
+        "body": {
+          "responses": [
+            {
+              "id": "0",
+              "status": 200,
+              "body": {
+                "value": [
+                  {
+                    "showAs": "busy",
+                    "start": {
+                      "dateTime": "2026-11-16T11:00:00"
+                    },
+                    "end": {
+                      "dateTime": "2026-11-16T11:30:00"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "truth": {
+      "busy": [
+        {
+          "start": "2026-11-16T11:00:00.000Z",
+          "end": "2026-11-16T11:30:00.000Z"
+        }
+      ],
+      "unknown": [],
+      "errors": []
+    }
+  },
+  {
+    "id": "retry-exhausted-5",
+    "family": "retry-exhausted",
+    "query": {
+      "dateFrom": "2026-11-16T09:00:00.000Z",
+      "dateTo": "2026-11-16T13:00:00.000Z",
+      "calendars": [
+        "a",
+        "b"
+      ]
+    },
+    "frames": [
+      {
+        "outerStatus": 200,
+        "gzip": true,
+        "body": {
+          "responses": [
+            {
+              "id": "0",
+              "status": 429,
+              "headers": {
+                "Retry-After": "0"
+              },
+              "body": {
+                "error": {
+                  "code": "SyntheticFailure"
+                }
+              }
+            },
+            {
+              "id": "1",
+              "status": 200,
+              "body": {
+                "value": []
+              }
+            }
+          ]
+        }
+      },
+      {
+        "outerStatus": 200,
+        "gzip": true,
+        "body": {
+          "responses": [
+            {
+              "id": "0",
+              "status": 429,
+              "headers": {
+                "Retry-After": "0"
+              },
+              "body": {
+                "error": {
+                  "code": "SyntheticFailure"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "outerStatus": 200,
+        "gzip": true,
+        "body": {
+          "responses": [
+            {
+              "id": "0",
+              "status": 429,
+              "headers": {
+                "Retry-After": "0"
+              },
+              "body": {
+                "error": {
+                  "code": "SyntheticFailure"
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "truth": {
+      "busy": [
+        {
+          "start": "2026-11-16T11:00:00.000Z",
+          "end": "2026-11-16T11:30:00.000Z"
+        }
+      ],
+      "unknown": [
+        "a"
+      ],
+      "errors": [
+        {
+          "calendar": "a",
+          "phase": "retry",
+          "reason": "HTTP 429"
+        }
+      ]
+    }
+  },
+  {
+    "id": "mixed-retry-error-5",
+    "family": "mixed-retry-error",
+    "query": {
+      "dateFrom": "2026-11-16T09:00:00.000Z",
+      "dateTo": "2026-11-16T13:00:00.000Z",
+      "calendars": [
+        "a",
+        "b"
+      ]
+    },
+    "frames": [
+      {
+        "outerStatus": 200,
+        "gzip": true,
+        "body": {
+          "responses": [
+            {
+              "id": "0",
+              "status": 429,
+              "headers": {
+                "Retry-After": "0"
+              },
+              "body": {
+                "error": {
+                  "code": "SyntheticFailure"
+                }
+              }
+            },
+            {
+              "id": "1",
+              "status": 503,
+              "headers": {
+                "Retry-After": "0"
+              },
+              "body": {
+                "error": {
+                  "code": "SyntheticFailure"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "outerStatus": 200,
+        "gzip": true,
+        "body": {
+          "responses": [
+            {
+              "id": "0",
+              "status": 200,
+              "body": {
+                "value": [
+                  {
+                    "showAs": "busy",
+                    "start": {
+                      "dateTime": "2026-11-16T11:00:00"
+                    },
+                    "end": {
+                      "dateTime": "2026-11-16T11:30:00"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "truth": {
+      "busy": [
+        {
+          "start": "2026-11-16T11:00:00.000Z",
+          "end": "2026-11-16T11:30:00.000Z"
+        }
+      ],
+      "unknown": [
+        "b"
+      ],
+      "errors": [
+        {
+          "calendar": "b",
+          "phase": "initial",
+          "reason": "HTTP 503"
+        }
+      ]
+    }
+  },
+  {
+    "id": "page-success-5",
+    "family": "page-success",
+    "query": {
+      "dateFrom": "2026-11-16T09:00:00.000Z",
+      "dateTo": "2026-11-16T13:00:00.000Z",
+      "calendars": [
+        "a",
+        "b"
+      ]
+    },
+    "frames": [
+      {
+        "outerStatus": 200,
+        "gzip": true,
+        "body": {
+          "responses": [
+            {
+              "id": "0",
+              "status": 200,
+              "body": {
+                "value": []
+              }
+            },
+            {
+              "id": "1",
+              "status": 200,
+              "body": {
+                "value": [],
+                "@odata.nextLink": "https://graph.microsoft.com/v1.0/me/calendars/b/calendarView?$skiptoken=synthetic-4"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "outerStatus": 200,
+        "gzip": true,
+        "body": {
+          "responses": [
+            {
+              "id": "1",
+              "status": 200,
+              "body": {
+                "value": [
+                  {
+                    "showAs": "busy",
+                    "start": {
+                      "dateTime": "2026-11-16T11:00:00"
+                    },
+                    "end": {
+                      "dateTime": "2026-11-16T11:30:00"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "truth": {
+      "busy": [
+        {
+          "start": "2026-11-16T11:00:00.000Z",
+          "end": "2026-11-16T11:30:00.000Z"
+        }
+      ],
+      "unknown": [],
+      "errors": []
+    }
+  },
+  {
+    "id": "page-failed-5",
+    "family": "page-failed",
+    "query": {
+      "dateFrom": "2026-11-16T09:00:00.000Z",
+      "dateTo": "2026-11-16T13:00:00.000Z",
+      "calendars": [
+        "a",
+        "b"
+      ]
+    },
+    "frames": [
+      {
+        "outerStatus": 200,
+        "gzip": true,
+        "body": {
+          "responses": [
+            {
+              "id": "0",
+              "status": 200,
+              "body": {
+                "value": []
+              }
+            },
+            {
+              "id": "1",
+              "status": 200,
+              "body": {
+                "value": [],
+                "@odata.nextLink": "https://graph.microsoft.com/v1.0/me/calendars/b/calendarView?$skiptoken=synthetic-4"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "outerStatus": 200,
+        "gzip": true,
+        "body": {
+          "responses": [
+            {
+              "id": "1",
+              "status": 503,
+              "headers": {
+                "Retry-After": "0"
+              },
+              "body": {
+                "error": {
+                  "code": "SyntheticFailure"
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "truth": {
+      "busy": [
+        {
+          "start": "2026-11-16T11:00:00.000Z",
+          "end": "2026-11-16T11:30:00.000Z"
+        }
+      ],
+      "unknown": [
+        "b"
+      ],
+      "errors": [
+        {
+          "calendar": "b",
+          "phase": "page",
+          "reason": "HTTP 503"
+        }
+      ]
+    }
+  }
+]

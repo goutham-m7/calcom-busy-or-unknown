@@ -12,10 +12,13 @@
     "test": "vitest run",
     "typecheck": "tsc --noEmit",
     "demo": "tsx src/cli.ts",
-    "check": "npm run typecheck && npm test && npm run demo"
+    "format:check": "prettier --check .",
+    "format": "prettier --write .",
+    "check": "npm run format:check && npm run typecheck && npm test && npm run demo"
   },
   "devDependencies": {
     "@types/node": "22.19.1",
+    "prettier": "3.6.2",
     "tsx": "4.20.6",
     "typescript": "5.9.3",
     "vitest": "4.0.8"

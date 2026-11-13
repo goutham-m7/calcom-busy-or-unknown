@@ -1,19 +1,44 @@
-import { mkdir, writeFile } from 'node:fs/promises';
-import { join } from 'node:path';
-import { runLab } from './lab.js';
-import { renderTimeline } from './timeline.js';
+import { mkdir, writeFile } from "node:fs/promises";
+import { join } from "node:path";
+import { runLab } from "./lab.js";
+import { renderTimeline } from "./timeline.js";
 const args = process.argv.slice(2);
-if (args.length && (args.length !== 2 || args[0] !== '--out' || !args[1])) throw new Error('Usage: npm run demo -- [--out DIRECTORY]');
-const destination = args[1] ?? 'artifacts';
-const report = await runLab(), m = report.metrics;
+if (args.length && (args.length !== 2 || args[0] !== "--out" || !args[1]))
+  throw new Error("Usage: npm run demo -- [--out DIRECTORY]");
+const destination = args[1] ?? "artifacts";
+const report = await runLab(),
+  m = report.metrics;
 await mkdir(destination, { recursive: true });
-await writeFile(join(destination, 'report.json'), JSON.stringify(report, null, 2) + '\n');
-await writeFile(join(destination, 'timeline.html'), renderTimeline(report));
-console.log('Busy-or-Unknown Calendar Lab');
-console.log('Public Cal.diy adapter; synthetic Graph boundary; offline only.');
-console.log('Fixtures: ' + m.fixtures + ' | candidate slots: ' + m.candidateSlots);
-console.log('Unsafe slots: baseline ' + m.baselineUnsafe + '/' + m.blockedOrUnknownSlots + ' -> proposed ' + m.proposedUnsafe + '/' + m.blockedOrUnknownSlots);
-console.log('Legitimate availability preserved: ' + m.proposedPreserved + '/' + m.legitimateSlots);
-console.log('Error localization: ' + m.localizationCorrect + '/' + m.localizationExpected + ' | false positives: ' + m.falsePositiveErrors);
-console.log('Artifacts: report.json, timeline.html');
-if (m.fixtures !== 50 || m.proposedUnsafe || m.proposedPreserved !== m.legitimateSlots || m.localizationCorrect !== m.localizationExpected || m.falsePositiveErrors) process.exitCode = 1;
+await writeFile(join(destination, "report.json"), JSON.stringify(report, null, 2) + "\n");
+await writeFile(join(destination, "timeline.html"), renderTimeline(report));
+console.log("Busy-or-Unknown Calendar Lab");
+console.log("Public Cal.diy adapter; synthetic Graph boundary; offline only.");
+console.log("Fixtures: " + m.fixtures + " | candidate slots: " + m.candidateSlots);
+console.log(
+  "Unsafe slots: baseline " +
+    m.baselineUnsafe +
+    "/" +
+    m.blockedOrUnknownSlots +
+    " -> proposed " +
+    m.proposedUnsafe +
+    "/" +
+    m.blockedOrUnknownSlots,
+);
+console.log("Legitimate availability preserved: " + m.proposedPreserved + "/" + m.legitimateSlots);
+console.log(
+  "Error localization: " +
+    m.localizationCorrect +
+    "/" +
+    m.localizationExpected +
+    " | false positives: " +
+    m.falsePositiveErrors,
+);
+console.log("Artifacts: report.json, timeline.html");
+if (
+  m.fixtures !== 50 ||
+  m.proposedUnsafe ||
+  m.proposedPreserved !== m.legitimateSlots ||
+  m.localizationCorrect !== m.localizationExpected ||
+  m.falsePositiveErrors
+)
+  process.exitCode = 1;

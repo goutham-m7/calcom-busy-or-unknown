@@ -1,0 +1,28 @@
+{
+  "surface": "cmux browser",
+  "date": "2026-11-13",
+  "viewport": {
+    "width": 488,
+    "height": 796
+  },
+  "fixture": "inner-503-1",
+  "baseline": {
+    "slot": "09:00FREE",
+    "display": "block"
+  },
+  "afterClickProposed": {
+    "policy": "proposed",
+    "pressed": "true",
+    "slot": "09:00UNKNOWN",
+    "display": "block",
+    "healthyFreeSlots": 8,
+    "status": "Proposed policy: incomplete coverage is unknown — cannot offer."
+  },
+  "afterSelectCleanBusy": {
+    "visibleCases": ["clean-busy-1"],
+    "busySlots": 1
+  },
+  "horizontalOverflow": false,
+  "browserErrors": [],
+  "note": "Observed real browser state. Not a screenshot; the cmux screenshot path option did not persist a file."
+}

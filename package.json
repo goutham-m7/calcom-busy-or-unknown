@@ -1,0 +1,23 @@
+{
+  "name": "calcom-busy-or-unknown",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Offline Graph fault replays against pinned Cal.diy availability methods",
+  "license": "MIT",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "demo": "tsx src/cli.ts",
+    "check": "npm run typecheck && npm test && npm run demo"
+  },
+  "devDependencies": {
+    "@types/node": "22.19.1",
+    "tsx": "4.20.6",
+    "typescript": "5.9.3",
+    "vitest": "4.0.8"
+  }
+}

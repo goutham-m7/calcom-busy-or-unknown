@@ -1,6 +1,17 @@
 # Busy-or-Unknown Calendar Lab
 
-Office365 calendar reads can return HTTP 200 while individual Graph batch requests fail. In the public Cal.diy adapter, that can make an unread calendar look empty to an availability caller. [Issue #30382](https://github.com/calcom/cal.diy/issues/30382) documents the failure and repro tests.
+An offline fault-replay lab that distinguishes free calendars from calendars whose busy times could not be read.
+
+## The problem
+
+People sharing booking links depend on every selected calendar being checked. If a failed calendar read looks like an empty calendar, a scheduler can offer a slot over an existing meeting.
+
+- Microsoft's [Graph batching documentation (dated 2025-02-21)](https://learn.microsoft.com/en-us/graph/json-batching) explicitly warns that an outer **HTTP 200 does not mean individual requests succeeded**; each subresponse has its own status.
+- Public Cal.diy [issue #30382 (2026-10-21; 1 comment, checked 2026-11-14)](https://github.com/calcom/cal.diy/issues/30382) reports non-429 batch failures and failed pagination being skipped, with reproduction tests showing failed reads returning partial busy times or `[]`.
+
+This lab replays synthetic Graph failures against a pinned public adapter and compares its offered slots with a proposed coverage-aware policy that keeps unread calendars unknown—not free—without blocking an independent healthy host.
+
+**Scope:** this is evidence about the public Cal.diy adapter, not proof that hosted Cal.com is affected.
 
 **0 / 255 unsafe slots offered with the proposed coverage policy, versus 235 / 255 with the pinned public adapter**, across 50 synthetic fixtures. All 145 legitimate slots remain available.
 
